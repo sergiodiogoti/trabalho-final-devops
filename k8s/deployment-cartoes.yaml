@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cartoes-app
+  labels:
+    app: cartoes
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: cartoes
+  template:
+    metadata:
+      labels:
+        app: cartoes
+    spec:
+      containers:
+        - name: cartoes-container
+          image: sergiodiogoti/cartoes:1.0
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
