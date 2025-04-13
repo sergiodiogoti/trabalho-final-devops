@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: cartoes-container
-          image: sergiodiogoti/cartoes:1.0
+          image: sergiodiogoti/cartoes:latest
           ports:
             - containerPort: 8080
           livenessProbe:

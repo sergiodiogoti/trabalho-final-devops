@@ -2,29 +2,26 @@ package com.ms.cartoes.controllers;
 
 import com.ms.cartoes.entities.Cliente;
 import com.ms.cartoes.services.ClienteService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    private final ClienteService service;
-
-    public ClienteController(ClienteService service) {
-        this.service = service;
-    }
+    @Autowired
+    private ClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente) {
-        return ResponseEntity.ok(service.salvar(cliente));
+    public Cliente saveCliente(@RequestBody Cliente cliente) {
+        return clienteService.salvar(cliente);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscar(@PathVariable String id) {
-        Cliente cliente = service.buscarPorId(id);
-        return cliente != null ? ResponseEntity.ok(cliente) : ResponseEntity.notFound().build();
+    public Cliente getCliente(@PathVariable String id) {
+        return clienteService.buscarPorId(id);
     }
 }
+
 

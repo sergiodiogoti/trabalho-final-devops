@@ -1,28 +1,26 @@
 package com.ms.cartoes.services;
 
 import com.ms.cartoes.entities.Cliente;
-import org.springframework.data.redis.core.RedisTemplate;
+import com.ms.cartoes.repository.ClienteRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
-
 
 @Service
 public class ClienteService {
 
-    private final RedisTemplate<String, Cliente> redisTemplate;
+    private final ClienteRepository clienteRepository;
 
-    public ClienteService(RedisTemplate<String, Cliente> redisTemplate) {
-        this.redisTemplate = redisTemplate;
+    public ClienteService(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
     }
 
     public Cliente salvar(Cliente cliente) {
-        cliente.setId(UUID.randomUUID().toString());
-        redisTemplate.opsForValue().set(cliente.getId(), cliente);
-        return cliente;
+        return clienteRepository.save(cliente); // Salva no Redis
     }
 
+    @Cacheable(value = "clientes", key = "#id")
     public Cliente buscarPorId(String id) {
-        return redisTemplate.opsForValue().get(id);
+        return clienteRepository.findById(id).orElse(null); // Recupera do Redis
     }
 }
+

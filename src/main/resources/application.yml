@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 
 management:
   endpoints:
@@ -9,6 +9,10 @@ management:
   endpoint:
     health:
       show-details: always
+  health:
+    redis:
+      enabled: false
+
 spring:
   redis:
     host: redis
