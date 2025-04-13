@@ -5,6 +5,8 @@ import com.ms.cartoes.repository.ClienteRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ClienteService {
 
@@ -15,6 +17,7 @@ public class ClienteService {
     }
 
     public Cliente salvar(Cliente cliente) {
+        cliente.setId(UUID.randomUUID().toString());
         return clienteRepository.save(cliente); // Salva no Redis
     }
 
