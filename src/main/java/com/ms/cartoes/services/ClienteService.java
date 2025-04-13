@@ -1,24 +1,28 @@
 package com.ms.cartoes.services;
 
 import com.ms.cartoes.entities.Cliente;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
+
 
 @Service
-public interface ClienteService {
-    Optional<Cliente> buscarPorID(Long id);
-    Optional<Cliente> buscarClientePorEmail(String email);
+public class ClienteService {
 
-    List<Cliente> buscarTodosClientes();
+    private final RedisTemplate<String, Cliente> redisTemplate;
 
-    Cliente salvarCliente(Cliente cliente);
+    public ClienteService(RedisTemplate<String, Cliente> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
-    Cliente atualizarCliente(Cliente cliente);
+    public Cliente salvar(Cliente cliente) {
+        cliente.setId(UUID.randomUUID().toString());
+        redisTemplate.opsForValue().set(cliente.getId(), cliente);
+        return cliente;
+    }
 
-    void deletarClientePorID(Long id);
-
-
-
+    public Cliente buscarPorId(String id) {
+        return redisTemplate.opsForValue().get(id);
+    }
 }

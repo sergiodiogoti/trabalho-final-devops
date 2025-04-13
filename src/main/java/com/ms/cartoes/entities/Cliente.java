@@ -1,45 +1,39 @@
 package com.ms.cartoes.entities;
 
-import com.ms.cartoes.enums.StatusCliente;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
 
-import java.math.BigDecimal;
+import org.springframework.data.redis.core.RedisHash;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
-@Table(name = "clientes")
-public class Cliente {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+import java.io.Serializable;
 
-    @NotBlank
-    @NotNull
+@RedisHash("Cliente")
+public class Cliente implements Serializable {
+
+    private String id;
     private String nome;
-
-    @NotBlank
-    @NotNull
-    @Email
-    @Column(unique = true)
     private String email;
 
-    @NotBlank
-    @NotNull
-    private String endereco;
+    public String getId() {
+        return id;
+    }
 
-    @NotNull
-    private BigDecimal rendaMensal;
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    @NotNull
-    @Enumerated(value= EnumType.STRING)
-    private StatusCliente status;
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
+
