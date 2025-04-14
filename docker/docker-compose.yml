@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # Serviço para o banco de dados MySQL
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      #MYSQL_ROOT_PASSWORD:
+      #MYSQL_USER: root
+      #MYSQL_PASSWORD:
+      MYSQL_DATABASE: cartoes_db
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:

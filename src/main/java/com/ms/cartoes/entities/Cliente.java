@@ -1,39 +1,30 @@
 package com.ms.cartoes.entities;
 
 
-import org.springframework.data.redis.core.RedisHash;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
+@Entity
+@Table(name = "cliente", schema = "cartoes")
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Cliente {
 
-@RedisHash("Cliente")
-public class Cliente implements Serializable {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private String id;
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "email")
     private String email;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
 

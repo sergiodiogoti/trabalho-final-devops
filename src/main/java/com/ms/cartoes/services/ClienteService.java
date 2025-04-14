@@ -2,10 +2,11 @@ package com.ms.cartoes.services;
 
 import com.ms.cartoes.entities.Cliente;
 import com.ms.cartoes.repository.ClienteRepository;
-import org.springframework.cache.annotation.Cacheable;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+import java.util.List;
+
 
 @Service
 public class ClienteService {
@@ -16,14 +17,19 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
+    @Transactional
     public Cliente salvar(Cliente cliente) {
-        cliente.setId(UUID.randomUUID().toString());
-        return clienteRepository.save(cliente); // Salva no Redis
+        return clienteRepository.save(cliente);
     }
 
-    @Cacheable(value = "clientes", key = "#id")
+    @Transactional
     public Cliente buscarPorId(String id) {
-        return clienteRepository.findById(id).orElse(null); // Recupera do Redis
+        return clienteRepository.findById(id).orElse(null);
+    }
+
+    @Transactional
+    public List<Cliente> buscarTodos() {
+        return (List<Cliente>) clienteRepository.findAll();
     }
 }
 
