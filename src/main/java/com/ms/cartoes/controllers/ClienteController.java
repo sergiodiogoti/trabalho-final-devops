@@ -20,33 +20,17 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity salvar(@RequestBody ClienteDTO dto){
-        try {
-            Cliente entidade = new Cliente();
-            entidade.setNome(dto.getNome());
-            entidade.setEmail(dto.getEmail());
-            entidade = clienteService.salvar(entidade);
-            return new ResponseEntity(entidade, HttpStatus.CREATED);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return new ResponseEntity(clienteService.salvar(dto), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity  getCliente(@PathVariable String id) {
-        try {
-            return new ResponseEntity(clienteService.buscarPorId(id), HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return new ResponseEntity(clienteService.buscarPorId(id), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity  getClienteAll() {
-        try {
-            return new ResponseEntity(clienteService.buscarTodos(), HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return new ResponseEntity(clienteService.buscarTodos(), HttpStatus.OK);
     }
 }
 

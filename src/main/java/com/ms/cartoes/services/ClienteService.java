@@ -1,5 +1,6 @@
 package com.ms.cartoes.services;
 
+import com.ms.cartoes.dto.ClienteDTO;
 import com.ms.cartoes.entities.Cliente;
 import com.ms.cartoes.repository.ClienteRepository;
 import jakarta.transaction.Transactional;
@@ -18,7 +19,10 @@ public class ClienteService {
     }
 
     @Transactional
-    public Cliente salvar(Cliente cliente) {
+    public Cliente salvar(ClienteDTO dto) {
+        Cliente cliente = new Cliente();
+        cliente.setNome(dto.getNome());
+        cliente.setEmail(dto.getEmail());
         return clienteRepository.save(cliente);
     }
 
