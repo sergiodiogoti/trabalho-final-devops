@@ -16,4 +16,4 @@ data:
       - job_name: 'cartoes-app'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['cartoes-service:8080']
+          - targets: ['cartoes-service.ms.svc.cluster.local:8080']
