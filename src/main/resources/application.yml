@@ -13,6 +13,7 @@ management:
 spring:
   datasource:
     url: jdbc:mysql://mysql:3306/cartoes_db
+#    url: jdbc:mysql://localhost:3306/cartoes_db
     username: root
     # password: ""
     driver-class-name: com.mysql.cj.jdbc.Driver
