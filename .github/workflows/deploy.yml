@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.PASS_DOCKER }}
 
       - name: Build da imagem Docker
-        run: docker build -f docker/Dockerfile -t $IMAGE_NAME:latest .
+        run: docker build -f docker/Dockerfile -t sergiodiogoti/cartoes:latest .
 
       - name: Push da imagem
         run: docker push $IMAGE_NAME:latest
