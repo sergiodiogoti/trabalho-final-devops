@@ -11,8 +11,8 @@ import lombok.*;
 public class ClienteDTO {
 
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Nome é Obrigatorio")
     private String nome;
-    @NotBlank
+    @NotBlank(message = "Email é Obrigatorio")
     private String email;
 }
