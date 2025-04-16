@@ -27,6 +27,9 @@ jobs:
       - name: Build da imagem Docker
         run: docker build -f docker/Dockerfile -t sergiodiogoti/cartoes:latest .
 
+      - name: Docker Logout
+        run: docker logout
+
       - name: Docker Login
         run: |
           echo "${{ secrets.PASS_DOCKER }}" | docker login --username "${{ secrets.USER_DOCKER }}" --password-stdin
