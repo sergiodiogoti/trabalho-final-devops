@@ -22,10 +22,12 @@ public class ClienteController {
     public ResponseEntity salvar(@RequestBody ClienteDTO dto){
         return new ResponseEntity(clienteService.salvar(dto), HttpStatus.CREATED);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity  getCliente(@PathVariable String id) {
         return new ResponseEntity(clienteService.buscarPorId(id), HttpStatus.OK);
     }
+
     @GetMapping
     public ResponseEntity  getClienteAll() {
         return new ResponseEntity(clienteService.buscarTodos(), HttpStatus.OK);
