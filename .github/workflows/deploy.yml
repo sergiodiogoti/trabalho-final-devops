@@ -24,15 +24,11 @@ jobs:
       - name: Build do JAR
         run: ./mvnw clean package -DskipTests
 
-#      - name: Login no Docker Hub
-#        uses: docker/login-action@v3
-#        with:
-#          username: ${{ secrets.USER_DOCKER }}
-#          password: ${{ secrets.PASS_DOCKER }}
-
       - name: Login no Docker Hub
-        run: echo "${{ secrets.PASS_DOCKER }}" | docker login -u "${{ secrets.USER_DOCKER }}" --password-stdin
-
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.USER_DOCKER }}
+          password: ${{ secrets.PASS_DOCKER }}
 
       - name: Build da imagem Docker
         run: docker build -f docker/Dockerfile -t sergiodiogoti/cartoes:latest .
