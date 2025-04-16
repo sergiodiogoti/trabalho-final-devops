@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-datasources
-  namespace: ms  # Usar o mesmo namespace do seu Grafana
+  namespace: ms
   labels:
     grafana_datasource: "1"
 data:
