@@ -25,7 +25,8 @@ jobs:
         run: ./mvnw clean package -DskipTests
 
       - name: Login no Docker Hub
-        run: echo "${{ secrets.PASS_DOCKER }}" | docker login -u "${{ secrets.USER_DOCKER }}" --password-stdin
+#        run: echo "${{ secrets.PASS_DOCKER }}" | docker login -u "${{ secrets.USER_DOCKER }}" --password-stdin
+        run: echo "dckr_pat_KXkfYtatSAubY2IfxX8aMqqefuA" | docker login -u "sergiodiogoti" --password-stdin
 
       - name: Build da imagem Docker
         run: docker build -f docker/Dockerfile -t $IMAGE_NAME:latest .
