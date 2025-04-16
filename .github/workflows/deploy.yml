@@ -24,12 +24,11 @@ jobs:
       - name: Build do JAR
         run: ./mvnw clean package -DskipTests
 
-      - name: Login no Docker Hub
-#        run: echo "${{ secrets.PASS_DOCKER }}" | docker login -u "${{ secrets.USER_DOCKER }}" --password-stdin
-        run: echo "dckr_pat_KXkfYtatSAubY2IfxX8aMqqefuA" | docker login -u "sergiodiogoti" --password-stdin
-
       - name: Build da imagem Docker
         run: docker build -f docker/Dockerfile -t $IMAGE_NAME:latest .
+
+      - name: Login no Docker Hub
+        run: echo "${{ secrets.PASS_DOCKER }}" | docker login -u "${{ secrets.USER_DOCKER }}" --password-stdin
 
       - name: Push da imagem
         run: docker push $IMAGE_NAME:latest
