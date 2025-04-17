@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-push-deploy:
-    runs-on: self-hosted  # precisa do runner local!
+    runs-on: self-hosted
 
     env:
       IMAGE_NAME: sergiodiogoti/cartoes
